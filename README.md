@@ -20,3 +20,6 @@ I suggest you to use two-step verification for the application. For additional i
 - Edit or add some urls by using 
 `scraper.check_hepsiburada_product(URL, PRICE)` function. First argument must be an url for the product, and the second parameter is price when the user will inform.
 - For example usage, you can check main.py or edit and run with `python3 main.py`
+
+### Supported Web Sites
+- [hepsiburada.com](https://www.hepsiburada.com/)
