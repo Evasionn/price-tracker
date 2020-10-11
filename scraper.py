@@ -1,50 +1,44 @@
 import requests
 from bs4 import BeautifulSoup
 import smtplib
-import time
-
-headers = {
-    "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"
-}
-
-SENDER_GMAIL = 'SENDER_GMAIL'
-GMAIL_PASSWORD = 'SENDER_PASSWORD'
-RECEIVER_EMAIL = 'RECEIVER_EMAIL'
-PRODUCT_URL = 'https://www.hepsiburada.com/iphone-se-64-gb-p-HBV00000SXR45'
 
 
-def check_hepsiburada_link(url, warn_price):
-    page = requests.get(url, headers=headers)
-    soup = BeautifulSoup(page.content, 'html.parser')
+class Scraper:
+    def __init__(self, sender_gmail, gmail_password, receiver_email):
+        self.sender_gmail = sender_gmail
+        self.gmail_password = gmail_password
+        self.receiver_email = receiver_email
+        self.headers = {
+            "User-Agent":
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 "
+                "Safari/537.36 "
+        }
 
-    title = soup.find(id='product-name').get_text()
-    price = float(
-        soup.find(id='offering-price').get_text().replace(
-            '\n', '').split(',')[0].replace('.', ''))
+    def check_hepsiburada_product(self, url, warn_price):
+        page = requests.get(url, headers=self.headers)
+        soup = BeautifulSoup(page.content, 'html.parser')
 
-    if price < warn_price:
-        send_mail(url)
+        product_name = soup.find(id='product-name').get_text().strip()
+        price = float(
+            soup.find(id='offering-price').get_text().replace(
+                '\n', '').split(',')[0].replace('.', ''))
 
+        if price < warn_price:
+            self.send_mail(url, product_name)
 
-def send_mail(url):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
+    def send_mail(self, url, product_name):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
 
-    server.login(SENDER_GMAIL, GMAIL_PASSWORD)
-    subject = 'Price Fell Down!'
-    body = 'Check the link ' + url
+        server.login(self.sender_gmail, self.gmail_password)
+        subject = 'Price Fell Down!'
+        body = f"{product_name} is cheaper now. Check the link below: \n{url}"
 
-    msg = f"Subject: {subject}\n\n{body}"
+        msg = f"Subject: {subject}\n\n{body}"
 
-    server.sendmail(SENDER_GMAIL, RECEIVER_EMAIL, msg)
-    print('HEY! EMAIL HAS BEEN SENT')
+        server.sendmail(self.sender_gmail, self.receiver_email, msg)
+        print('An email has been sent!')
 
-    server.quit()
-
-
-while True:
-    check_hepsiburada_link(PRODUCT_URL, 4500)
-    time.sleep(60 * 60)
+        server.quit()
