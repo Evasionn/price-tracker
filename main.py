@@ -3,14 +3,15 @@ import time
 
 from scraper import Scraper
 
-PRODUCT_URL = 'https://www.hepsiburada.com/iphone-se-64-gb-p-HBV00000SXR45'
-
 with open('config.json') as json_file:
-    data = json.load(json_file)
+    config = json.load(json_file)
+with open('products.json') as json_file:
+    products = json.load(json_file)
 
-scraper = Scraper(data["SENDER_GMAIL"], data["GMAIL_PASSWORD"], data["RECEIVER_EMAIL"])
+scraper = Scraper(config["SENDER_GMAIL"], config["GMAIL_PASSWORD"], config["RECEIVER_EMAIL"])
 
 while True:
     # you can add more link here
-    scraper.check_hepsiburada_product(PRODUCT_URL, 5000)
+    for product in products:
+        scraper.check_hepsiburada_product(product['url'], product['warn_price'])
     time.sleep(60 * 60)
