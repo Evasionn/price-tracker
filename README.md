@@ -15,9 +15,9 @@ I suggest you to use two-step verification for the application. For additional i
     - SENDER_GMAIL: Your gmail account will be used for sending email
     - GMAIL_PASSWORD: Your gmail account password.
     - RECEIVER_EMAIL: The email address that the application will inform when the price fell down.
-- Edit or add some urls by using 
-`scraper.check_hepsiburada_product(URL, PRICE)` function. First argument must be an url for the product, and the second parameter is price when the user will inform.
-- For example usage, you can check main.py or edit and run with `python3 main.py`
+- Edit product list in `products.json`
+- run **main.py** `python3 main.py`
 
 ### Supported Web Sites
 - [hepsiburada.com](https://www.hepsiburada.com/)
+- [gittigidiyor.com](https://www.gittigidiyor.com/)

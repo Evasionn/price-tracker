@@ -1,3 +1,5 @@
+from typing import List, Any
+
 import requests
 from bs4 import BeautifulSoup
 import smtplib
@@ -14,7 +16,18 @@ class Scraper:
                 "Safari/537.36 "
         }
 
-    def check_hepsiburada_product(self, url: str, warn_price: float) -> object:
+    def run(self, product_list):
+        unsent_items: List[Any] = []
+        for product in product_list:
+            if 'hepsiburada' in product['url']:
+                if not self.check_hepsiburada_product(product['url'], product['warn_price']):
+                    unsent_items.append(product)
+            elif 'gittigidiyor' in product['url']:
+                if not self.check_gittigidiyor_product(product['url'], product['warn_price']):
+                    unsent_items.append(product)
+        return unsent_items
+
+    def check_hepsiburada_product(self, url: str, warn_price: float) -> bool:
         page = requests.get(url, headers=self.headers)
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -22,6 +35,18 @@ class Scraper:
         price = float(
             soup.find(id='offering-price').get_text().replace(
                 '\n', '').split(',')[0].replace('.', ''))
+
+        if price < warn_price:
+            self.send_mail(url, product_name)
+            return True
+        return False
+
+    def check_gittigidiyor_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers)
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find(id='sp-title').get_text().strip()
+        price = float(soup.find(class_='lastPrice').get_text().replace('\n', '').split(',')[0].replace('.', ''))
 
         if price < warn_price:
             self.send_mail(url, product_name)
