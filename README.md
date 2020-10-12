@@ -9,8 +9,7 @@ I suggest you to use two-step verification for the application. For additional i
     - [Google App Passwords](https://myaccount.google.com/apppasswords)
 - python3 `sudo apt-get install python3`
 - pip  `sudo apt-get install python3-pip`
-- BeautifulSoup4 library `python3 -m pip install BeautifulSoup4`
-
+- run `pip3 install -r requirements.txt` to install dependencies
 ## Usage
 - Set properties in `config.json`
     - SENDER_GMAIL: Your gmail account will be used for sending email
