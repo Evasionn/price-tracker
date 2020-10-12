@@ -14,7 +14,7 @@ class Scraper:
                 "Safari/537.36 "
         }
 
-    def check_hepsiburada_product(self, url, warn_price):
+    def check_hepsiburada_product(self, url: str, warn_price: float) -> object:
         page = requests.get(url, headers=self.headers)
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -25,6 +25,8 @@ class Scraper:
 
         if price < warn_price:
             self.send_mail(url, product_name)
+            return True
+        return False
 
     def send_mail(self, url, product_name):
         server = smtplib.SMTP('smtp.gmail.com', 587)
