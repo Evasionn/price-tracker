@@ -1,8 +1,34 @@
-from typing import List, Any
+import abc
+import smtplib
 
 import requests
 from bs4 import BeautifulSoup
-import smtplib
+
+
+class ICommand(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def execute(self):
+        pass
+
+
+class HepsiburadaCommand(ICommand):
+    def __init__(self, scraper, url, warn_price):
+        self.scrapper = scraper
+        self.url = url
+        self.warn_price = warn_price
+
+    def execute(self):
+        return self.scrapper.check_hepsiburada_product(self.url, self.warn_price)
+
+
+class GittigidiyorCommand(ICommand):
+    def __init__(self, scraper, url, warn_price):
+        self.scrapper = scraper
+        self.url = url
+        self.warn_price = warn_price
+
+    def execute(self):
+        return self.scrapper.check_gittigidiyor_product(self.url, self.warn_price)
 
 
 class Scraper:
@@ -16,16 +42,17 @@ class Scraper:
                 "Safari/537.36 "
         }
 
+    def str_to_command(self, product):
+        if 'hepsiburada' in product['url']:
+            return HepsiburadaCommand(self, product['url'], product['warn_price'])
+        elif 'gittigidiyor' in product['url']:
+            return GittigidiyorCommand(self, product['url'], product['warn_price'])
+
     def run(self, product_list):
-        unsent_items: List[Any] = []
-        for product in product_list:
-            if 'hepsiburada' in product['url']:
-                if not self.check_hepsiburada_product(product['url'], product['warn_price']):
-                    unsent_items.append(product)
-            elif 'gittigidiyor' in product['url']:
-                if not self.check_gittigidiyor_product(product['url'], product['warn_price']):
-                    unsent_items.append(product)
-        return unsent_items
+        return [
+            product for product in product_list
+            if not self.str_to_command(product).execute()
+        ]
 
     def check_hepsiburada_product(self, url: str, warn_price: float) -> bool:
         page = requests.get(url, headers=self.headers)
