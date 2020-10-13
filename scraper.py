@@ -66,7 +66,8 @@ class Scraper:
 
         server.login(self.sender_gmail, self.gmail_password)
         subject = 'Price Fell Down!'
-        body = f"{product_name} is cheaper now. Check the link below: \n{url}"
+        Tr2Eng = str.maketrans("çğıöşü", "cgiosu")
+        body = f"{product_name} is cheaper now. Check the link below: \n{url}".translate(Tr2Eng)
 
         msg = f"Subject: {subject}\n\n{body}"
 
