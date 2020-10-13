@@ -1,7 +1,7 @@
 import json
 import time
 
-from commands import HepsiburadaCommand, GittigidiyorCommand, Invoker
+from commands import HepsiburadaCommand, GittigidiyorCommand, Invoker, TrendyolCommand
 from scraper import Scraper
 
 # Reading config file and product list
@@ -20,6 +20,8 @@ def build_command(receiver, item):
         return HepsiburadaCommand(receiver, item)
     elif 'gittigidiyor' in item['url']:
         return GittigidiyorCommand(receiver, item)
+    elif 'trendyol' in item['url']:
+        return TrendyolCommand(receiver, item)
 
 
 # Creating an invoker for the execute remaining commands
@@ -29,4 +31,6 @@ for product in products:
 
 while not invoker.is_empty():
     invoker.execute()
+    if invoker.is_empty():
+        break
     time.sleep(60 * 60)

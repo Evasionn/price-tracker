@@ -41,6 +41,23 @@ class Scraper:
             return True
         return False
 
+    def check_trendyol_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers)
+
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find(class_='pr-nm').get_text().strip()
+        if soup.find(class_='prc-dsc'):
+            price = soup.find(class_='prc-dsc')
+        else:
+            price = soup.find(class_='prc-slg')
+
+        price = float(price.get_text().split(',')[0].replace('.', ''))
+        if price < warn_price:
+            self.send_mail(url, product_name)
+            return True
+        return False
+
     def send_mail(self, url, product_name):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
