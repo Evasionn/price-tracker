@@ -8,20 +8,40 @@ class ICommand(metaclass=abc.ABCMeta):
 
 
 class HepsiburadaCommand(ICommand):
-    def __init__(self, scraper, url, warn_price):
-        self.scrapper = scraper
-        self.url = url
-        self.warn_price = warn_price
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
 
     def execute(self):
-        return self.scrapper.check_hepsiburada_product(self.url, self.warn_price)
+        return self.receiver.check_hepsiburada_product(self.arg['url'], self.arg['warn_price'])
 
 
 class GittigidiyorCommand(ICommand):
-    def __init__(self, scraper, url, warn_price):
-        self.scrapper = scraper
-        self.url = url
-        self.warn_price = warn_price
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
 
     def execute(self):
-        return self.scrapper.check_gittigidiyor_product(self.url, self.warn_price)
+        return self.receiver.check_gittigidiyor_product(self.arg['url'], self.arg['warn_price'])
+
+
+class Invoker:
+    def __init__(self):
+        self.commands = []
+
+    def register(self, command):
+        self.commands.append(command)
+
+    def clear(self):
+        self.commands.clear()
+
+    def is_empty(self):
+        if not self.commands:
+            return True
+        return False
+
+    def execute(self):
+        self.commands = [
+            command for command in self.commands
+            if not command.execute()
+        ]

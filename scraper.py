@@ -3,8 +3,6 @@ import smtplib
 import requests
 from bs4 import BeautifulSoup
 
-from commands import HepsiburadaCommand, GittigidiyorCommand
-
 
 class Scraper:
     def __init__(self, sender_gmail, gmail_password, receiver_email):
@@ -16,18 +14,6 @@ class Scraper:
                 "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 "
                 "Safari/537.36 "
         }
-
-    def str_to_command(self, product):
-        if 'hepsiburada' in product['url']:
-            return HepsiburadaCommand(self, product['url'], product['warn_price'])
-        elif 'gittigidiyor' in product['url']:
-            return GittigidiyorCommand(self, product['url'], product['warn_price'])
-
-    def run(self, product_list):
-        return [
-            product for product in product_list
-            if not self.str_to_command(product).execute()
-        ]
 
     def check_hepsiburada_product(self, url: str, warn_price: float) -> bool:
         page = requests.get(url, headers=self.headers)

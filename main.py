@@ -1,18 +1,31 @@
 import json
 import time
 
+from commands import HepsiburadaCommand, GittigidiyorCommand, Invoker
 from scraper import Scraper
 
+# Reading config file and product list
 with open('config.json') as json_file:
     config = json.load(json_file)
 with open('products.json') as json_file:
     products = json.load(json_file)
 
+# Scraper instance that is receiver of commands
 scraper = Scraper(config["SENDER_GMAIL"], config["GMAIL_PASSWORD"], config["RECEIVER_EMAIL"])
 
-while True:
-    products = scraper.run(products)
-    if not products:
-        break
 
+# Function for generating commands from domain address
+def build_command(receiver, item):
+    if 'hepsiburada' in item['url']:
+        return HepsiburadaCommand(receiver, item)
+    elif 'gittigidiyor' in item['url']:
+        return GittigidiyorCommand(receiver, item)
+
+
+# Creating an invoker for the execute remaining commands
+invoker = Invoker()
+for product in products:
+    invoker.register(build_command(scraper, product))
+
+while not invoker.is_empty():
     time.sleep(60 * 60)
