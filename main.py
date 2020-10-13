@@ -28,4 +28,5 @@ for product in products:
     invoker.register(build_command(scraper, product))
 
 while not invoker.is_empty():
+    invoker.execute()
     time.sleep(60 * 60)
