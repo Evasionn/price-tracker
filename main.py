@@ -1,7 +1,7 @@
 import json
 import time
 
-from commands import HepsiburadaCommand, GittigidiyorCommand, Invoker, TrendyolCommand, AmazonCommand
+from commands import HepsiburadaCommand, GittigidiyorCommand, Invoker, TrendyolCommand, AmazonCommand, VatanCommand
 from scraper import Scraper
 
 # Reading config file and product list
@@ -24,6 +24,8 @@ def build_command(receiver, item):
         return TrendyolCommand(receiver, item)
     elif 'amazon' in item['url']:
         return AmazonCommand(receiver, item)
+    elif 'vatanbilgisayar' in item['url']:
+        return VatanCommand(receiver, item)
 
 
 # Creating an invoker for the execute remaining commands

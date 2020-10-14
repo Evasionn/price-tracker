@@ -23,3 +23,4 @@ I suggest you to use two-step verification for the application. For additional i
 - [gittigidiyor.com](https://www.gittigidiyor.com/)
 - [trendyol.com](https://www.trendyol.com/)
 - [amazon.com](https://www.amazon.com/) for each country
+- [vatanbilgisayar.com](https://www.vatanbilgisayar.com/)
