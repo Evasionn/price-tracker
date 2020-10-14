@@ -1,3 +1,4 @@
+import re
 import smtplib
 
 import requests
@@ -21,8 +22,8 @@ class Scraper:
 
         product_name = soup.find(id='product-name').get_text().strip()
         price = float(
-            soup.find(id='offering-price').get_text().replace(
-                '\n', '').split(',')[0].replace('.', ''))
+            re.sub(r'\D', '', soup.find(id='offering-price').get_text().split(',')[0])
+        )
 
         if price < warn_price:
             self.send_mail(url, product_name)
@@ -34,7 +35,9 @@ class Scraper:
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(id='sp-title').get_text().strip()
-        price = float(soup.find(class_='lastPrice').get_text().replace('\n', '').split(',')[0].replace('.', ''))
+        price = float(
+            re.sub(r'\D', '', soup.find(class_='lastPrice').get_text().replace('\n', '').split(',')[0])
+        )
 
         if price < warn_price:
             self.send_mail(url, product_name)
@@ -47,12 +50,34 @@ class Scraper:
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(class_='pr-nm').get_text().strip()
-        if soup.find(class_='prc-dsc'):
-            price = soup.find(class_='prc-dsc')
-        else:
+
+        price = soup.find(class_='prc-dsc')
+        if not price:
             price = soup.find(class_='prc-slg')
 
-        price = float(price.get_text().split(',')[0].replace('.', ''))
+        price = float(
+            re.sub(r'\D', '', price.get_text().split(',')[0])
+        )
+        if price < warn_price:
+            self.send_mail(url, product_name)
+            return True
+        return False
+
+    def check_amazon_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers)
+
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find(id='productTitle').get_text().strip()
+
+        price = soup.find(id='priceblock_dealprice')
+        if not price:
+            price = soup.find(id='priceblock_ourprice')
+
+        price = float(
+            re.sub(r'\D', '', price.get_text().split(',')[0])
+        )
+
         if price < warn_price:
             self.send_mail(url, product_name)
             return True

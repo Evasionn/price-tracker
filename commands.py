@@ -34,6 +34,15 @@ class TrendyolCommand(ICommand):
         return self.receiver.check_trendyol_product(self.arg['url'], self.arg['warn_price'])
 
 
+class AmazonCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_amazon_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []
