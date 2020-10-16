@@ -6,9 +6,9 @@ from scraper import Scraper
 
 def build_invoker():
     # Reading config file and product list
-    with open('../../config.json') as json_file:
+    with open('../config.json') as json_file:
         config = json.load(json_file)
-    with open('../../products.json') as json_file:
+    with open('../products.json') as json_file:
         products = json.load(json_file)
 
     # Scraper instance that is receiver of commands
