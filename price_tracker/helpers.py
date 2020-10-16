@@ -4,12 +4,15 @@ from commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolC
 from scraper import Scraper
 
 
-def build_invoker():
+def build_invoker(input_file):
     # Reading config file and product list
-    with open('../config.json') as json_file:
-        config = json.load(json_file)
-    with open('../products.json') as json_file:
-        products = json.load(json_file)
+    try:
+        with open('../config.json') as json_file:
+            config = json.load(json_file)
+        with open(input_file) as json_file:
+            products = json.load(json_file)
+    except ValueError:
+        raise
 
     # Scraper instance that is receiver of commands
     scraper = Scraper(config["SENDER_GMAIL"], config["GMAIL_PASSWORD"], config["RECEIVER_EMAIL"])
