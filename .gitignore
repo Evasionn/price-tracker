@@ -226,3 +226,6 @@ cython_debug/
 
 test.json
 test_products.json
+config-example.json
+products-example.json
+config.json
