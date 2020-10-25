@@ -1,4 +1,8 @@
 # PRICE TRACKER
+[![Build Status](https://img.shields.io/pypi/pyversions/price-tracker)](https://pypi.org/project/price-tracker/)
+[![License](https://img.shields.io/github/license/Evasionn/price-tracker)](LICENSE)
+[![Version](https://img.shields.io/pypi/v/price-tracker)](https://pypi.org/project/price-tracker/)
+
 It's a simple python3 application that tracks prices and warn the user by email.
 
 ## Installation
@@ -54,8 +58,8 @@ price_tracker -i products.json
 - optionally you can define a config.json. It should be in format bellow:
 ```json
 {
-    "sender_gmail": "gmail@gmail.com"
-    "gmail_password": "mygmailpassword!"
+    "sender_gmail": "gmail@gmail.com",
+    "gmail_password": "mygmailpassword!",
     "receiver_mail": "receiver@gmail.com" 
 }
 ```
