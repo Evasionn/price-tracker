@@ -61,7 +61,7 @@ def main(argv):
     input_file = ''
     config_file = ''
     try:
-        opts, args = getopt.getopt(argv, "hi:c")
+        opts, args = getopt.getopt(argv, "hi:c:")
     except getopt.GetoptError:
         print(help_text)
         sys.exit(2)

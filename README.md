@@ -68,6 +68,11 @@ To run with config file
 price_tracker -i products.json -c config.json
 ```
 
+- To run in background products and config file must be given as command line argument
+```bash
+nohup python3 -u -m price_tracker -i products.json -c config.json &
+```
+
 ### Supported Web Sites
 - [hepsiburada.com](https://www.hepsiburada.com/)
 - [gittigidiyor.com](https://www.gittigidiyor.com/)
