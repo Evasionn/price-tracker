@@ -2,9 +2,12 @@ import sys
 
 
 def main():
-    from price_tracker.price_tracker import main
-    args = sys.argv[1:]
-    main(args)
+    try:
+        from price_tracker.price_tracker import main
+        args = sys.argv[1:]
+        main(args)
+    except KeyboardInterrupt:
+        sys.exit(0)
 
 
 if __name__ == '__main__':
