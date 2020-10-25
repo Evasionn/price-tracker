@@ -94,11 +94,11 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name)
+            self.send_mail(url, product_name, price)
             return True
         return False
 
-    def send_mail(self, url, product_name):
+    def send_mail(self, url, product_name, price):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
@@ -106,12 +106,12 @@ class Scraper:
 
         server.login(self.sender_gmail, self.gmail_password)
         subject = 'Price Fell Down!'
-        Tr2Eng = str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCĞIOSU")
-        body = f"{product_name} is cheaper now. Check the link below: \n{url}".translate(Tr2Eng)
+        tr2_eng = str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCĞIOSU")
+        body = f"{product_name} is cheaper now. Check the link below: \n{url}".translate(tr2_eng)
 
         msg = f"Subject: {subject}\n\n{body}"
 
         server.sendmail(self.sender_gmail, self.receiver_email, msg)
-        print('An email has been sent!')
+        print(f'An email has been sent for {product_name} when its price is {price}.')
 
         server.quit()
