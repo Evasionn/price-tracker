@@ -5,7 +5,7 @@ import sys
 import time
 from getpass import getpass
 
-from helpers import build_invoker
+from price_tracker.helpers import build_invoker
 
 help_text = '''usage: price_tracker [-h] [-i <input_json>] [-c <config_json>]
 
@@ -27,17 +27,17 @@ def ask_config(config_file):
             raise
 
     try:
-        with open('../config-example.json') as json_file:
+        with open('../../config.json') as json_file:
             config = json.load(json_file)
             answer = input('There is a config file from previous login. Do you want to use it [y|n]: ')
             if answer == 'y':
                 return config
             elif answer == 'n':
-                os.remove('../config-example.json')
+                os.remove('../../config.json')
     except FileNotFoundError:
         pass
     except ValueError:
-        os.remove('../config-example.json')
+        os.remove('../../config.json')
 
     sender_gmail = input('Sender Gmail Address: ')
     gmail_password = getpass(prompt='Gmail Password: ')
@@ -46,7 +46,7 @@ def ask_config(config_file):
     answer = input('Do you want to save this configuration for next login [y|n]: ')
     config = {'sender_gmail': sender_gmail, 'gmail_password': gmail_password, 'receiver_email': receiver_email}
     if answer == 'y':
-        with open('../config-example.json', 'w') as config_file:
+        with open('../../config.json', 'w') as config_file:
             json.dump(config, config_file)
 
     return config

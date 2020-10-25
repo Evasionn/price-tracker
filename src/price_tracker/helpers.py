@@ -1,7 +1,7 @@
 import json
 
-from commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, VatanCommand
-from scraper import Scraper
+from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, VatanCommand
+from price_tracker.scraper import Scraper
 
 
 def build_invoker(input_file, config):
