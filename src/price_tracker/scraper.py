@@ -26,7 +26,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name)
+            self.send_mail(url, product_name, price)
             return True
         return False
 
@@ -40,7 +40,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name)
+            self.send_mail(url, product_name, price)
             return True
         return False
 
@@ -58,7 +58,7 @@ class Scraper:
             re.sub(r'\D', '', price.get_text().split(',')[0])
         )
         if price < warn_price:
-            self.send_mail(url, product_name)
+            self.send_mail(url, product_name, price)
             return True
         return False
 
@@ -78,7 +78,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name)
+            self.send_mail(url, product_name, price)
             return True
         return False
 
