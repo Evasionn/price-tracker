@@ -1,15 +1,12 @@
 import re
-import smtplib
 
 import requests
 from bs4 import BeautifulSoup
 
 
 class Scraper:
-    def __init__(self, sender_gmail, gmail_password, receiver_email):
-        self.sender_gmail = sender_gmail
-        self.gmail_password = gmail_password
-        self.receiver_email = receiver_email
+    def __init__(self, mailer):
+        self.mailer = mailer
         self.headers = {
             "User-Agent":
                 "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 "
@@ -26,7 +23,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name, price)
+            self.mailer.send_mail(url, product_name, price)
             return True
         return False
 
@@ -40,7 +37,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name, price)
+            self.mailer.send_mail(url, product_name, price)
             return True
         return False
 
@@ -58,7 +55,7 @@ class Scraper:
             re.sub(r'\D', '', price.get_text().split(',')[0])
         )
         if price < warn_price:
-            self.send_mail(url, product_name, price)
+            self.mailer.send_mail(url, product_name, price)
             return True
         return False
 
@@ -78,7 +75,7 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name, price)
+            self.mailer.send_mail(url, product_name, price)
             return True
         return False
 
@@ -94,24 +91,6 @@ class Scraper:
         )
 
         if price < warn_price:
-            self.send_mail(url, product_name, price)
+            self.mailer.send_mail(url, product_name, price)
             return True
         return False
-
-    def send_mail(self, url, product_name, price):
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-
-        server.login(self.sender_gmail, self.gmail_password)
-        subject = 'Price Fell Down!'
-        tr2_eng = str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCĞIOSU")
-        body = f"{product_name} is cheaper now. Check the link below: \n{url}".translate(tr2_eng)
-
-        msg = f"Subject: {subject}\n\n{body}"
-
-        server.sendmail(self.sender_gmail, self.receiver_email, msg)
-        print(f'An email has been sent for {product_name} when its price is {price}.')
-
-        server.quit()

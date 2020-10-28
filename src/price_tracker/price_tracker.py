@@ -6,6 +6,7 @@ import time
 from getpass import getpass
 
 from price_tracker.helpers import build_invoker
+from price_tracker.mailer import Mailer
 
 help_text = '''usage: price_tracker [-h] [-i <input_json>] [-c <config_json>]
 
@@ -83,14 +84,19 @@ def main(argv):
 
 
 def run(input_file, config):
-    invoker = build_invoker(input_file, config)
+    mailer = Mailer(config["sender_gmail"], config["gmail_password"], config["receiver_email"])
+    mailer.log_in()
+
+    invoker = build_invoker(input_file, mailer)
     try:
         while not invoker.is_empty():
             invoker.execute()
             if invoker.is_empty():
+                mailer.log_out()
                 break
             time.sleep(60 * 60)
     except KeyboardInterrupt:
+        mailer.log_out()
         sys.exit(0)
 
 
