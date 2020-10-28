@@ -68,7 +68,14 @@ class Invoker:
         return False
 
     def execute(self):
-        self.commands = [
-            command for command in self.commands
-            if not command.execute()
-        ]
+        remaining_list = []
+        for command in self.commands:
+            try:
+                res = command.execute()
+            except AttributeError:
+                print(f"Product not found at url: {command.arg['url']}")
+                res = True
+
+            if not res:
+                remaining_list.append(command)
+        self.commands = remaining_list
