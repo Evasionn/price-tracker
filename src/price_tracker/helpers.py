@@ -1,7 +1,7 @@
 import json
 
 from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, \
-    VatanCommand
+    VatanCommand, TeknosaCommand
 from price_tracker.scraper import Scraper
 
 
@@ -36,3 +36,5 @@ def build_command(receiver, item):
         return AmazonCommand(receiver, item)
     elif 'vatanbilgisayar' in item['url']:
         return VatanCommand(receiver, item)
+    elif 'teknosa' in item['url']:
+        return TeknosaCommand(receiver, item)

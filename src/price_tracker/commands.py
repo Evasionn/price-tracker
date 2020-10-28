@@ -52,6 +52,15 @@ class VatanCommand(ICommand):
         return self.receiver.check_vatan_product(self.arg['url'], self.arg['warn_price'])
 
 
+class TeknosaCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_teknosa_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []

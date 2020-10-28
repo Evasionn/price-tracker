@@ -2,6 +2,9 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
+import urllib3
+
+urllib3.disable_warnings()
 
 
 class Scraper:
@@ -9,7 +12,7 @@ class Scraper:
         self.mailer = mailer
         self.headers = {
             "User-Agent":
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 "
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.74 "
                 "Safari/537.36 "
         }
 
@@ -88,6 +91,21 @@ class Scraper:
 
         price = float(
             re.sub(r'\D', '', soup.find(class_='product-list__price').get_text().strip())
+        )
+
+        if price < warn_price:
+            self.mailer.send_mail(url, product_name, price)
+            return True
+        return False
+
+    def check_teknosa_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers, verify=False)
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find(class_='product-title').get_text().strip()
+
+        price = float(
+            re.findall(r"cd_product_price: '(.*)'", soup.prettify())[0]
         )
 
         if price < warn_price:

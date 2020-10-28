@@ -79,3 +79,4 @@ nohup python3 -u -m price_tracker -i products.json -c config.json &
 - [trendyol.com](https://www.trendyol.com/)
 - [amazon.com](https://www.amazon.com/) for each country
 - [vatanbilgisayar.com](https://www.vatanbilgisayar.com/)
+- [teknosa.com](https://www.teknosa.com/)
