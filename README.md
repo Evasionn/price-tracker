@@ -91,4 +91,5 @@ nohup python3 -u -m price_tracker -i products.json -c config.json &
 - [n11.com](https://urun.n11.com/)
 - [ciceksepeti.net](https://www.ciceksepeti.net/)
 - [ciceksepeti.com](https://www.ciceksepeti.com/)
-- [mediamarkt.com.tr/](https://www.mediamarkt.com.tr/)
+- [mediamarkt.com.tr](https://www.mediamarkt.com.tr/)
+- [ebay.com](https://www.ebay.com/)

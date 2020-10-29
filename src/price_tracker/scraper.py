@@ -141,3 +141,16 @@ class Scraper:
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_ebay_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.select_one('h1', id='itemTitle')
+        [x.extract() for x in product_name.findAll('span')]
+        product_name = product_name.get_text().strip()
+
+        price = float(
+            re.findall(r'\d+\.\d+', soup.find(id='prcIsum').get_text())[0]
+        )
+
+        return self.mail_decider(url, product_name, price, warn_price)
