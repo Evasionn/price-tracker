@@ -4,20 +4,17 @@ import requests
 from bs4 import BeautifulSoup
 import urllib3
 
+from price_tracker.user_agent import get_random_user_agent
+
 urllib3.disable_warnings()
 
 
 class Scraper:
     def __init__(self, mailer):
         self.mailer = mailer
-        self.headers = {
-            "User-Agent":
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.74 "
-                "Safari/537.36 "
-        }
 
     def check_hepsiburada_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(id='product-name').get_text().strip()
@@ -31,7 +28,7 @@ class Scraper:
         return False
 
     def check_gittigidiyor_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(id='sp-title').get_text().strip()
@@ -45,7 +42,7 @@ class Scraper:
         return False
 
     def check_trendyol_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -63,7 +60,7 @@ class Scraper:
         return False
 
     def check_amazon_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -83,7 +80,7 @@ class Scraper:
         return False
 
     def check_vatan_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -99,7 +96,7 @@ class Scraper:
         return False
 
     def check_teknosa_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers, verify=False)
+        page = requests.get(url, headers=get_random_user_agent(), verify=False)
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(class_='product-title').get_text().strip()
@@ -114,7 +111,7 @@ class Scraper:
         return False
 
     def check_n11_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers, verify=False)
+        page = requests.get(url, headers=get_random_user_agent(), verify=False)
         soup = BeautifulSoup(page.content, 'html.parser')
 
         product_name = soup.find(class_='proName').get_text().strip()
@@ -129,7 +126,7 @@ class Scraper:
         return False
 
     def check_ciceksepeti_net_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -145,7 +142,7 @@ class Scraper:
         return False
 
     def check_ciceksepeti_com_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -161,7 +158,7 @@ class Scraper:
         return False
 
     def check_mediamarkt_product(self, url: str, warn_price: float) -> bool:
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=get_random_user_agent())
 
         soup = BeautifulSoup(page.content, 'html.parser')
 
