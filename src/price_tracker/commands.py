@@ -70,6 +70,15 @@ class N11Command(ICommand):
         return self.receiver.check_n11_product(self.arg['url'], self.arg['warn_price'])
 
 
+class CiceksepetiNetCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_ciceksepeti_net_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []
