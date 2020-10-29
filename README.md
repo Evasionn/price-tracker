@@ -5,6 +5,14 @@
 
 It's a simple python3 application that tracks prices and warn the user by email.
 
+## What is New
+### Version 0.4
+- Some bugs are fixed and includes code refactor works
+- More understandable error messages for the user
+- Removing commands that has error
+- teknosa.com, n11.com, ciceksepeti.net, ciceksepeti.com, mediamarkt.com.tr scappers are added
+- code of conduct is published
+
 ## Installation
 ### Requirements
 - python3 or later to run price-tracker
