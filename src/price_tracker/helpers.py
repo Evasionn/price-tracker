@@ -11,7 +11,8 @@ def build_invoker(input_file, mailer):
         with open(input_file) as json_file:
             products = json.load(json_file)
     except ValueError:
-        raise
+        print('Json file that stores products is broken')
+        exit(3)
 
     # Scraper instance that is receiver of commands
     scraper = Scraper(mailer)
@@ -38,3 +39,5 @@ def build_command(receiver, item):
         return VatanCommand(receiver, item)
     elif 'teknosa' in item['url']:
         return TeknosaCommand(receiver, item)
+    else:
+        print(f'{item["url"]} is a non-supported web site')

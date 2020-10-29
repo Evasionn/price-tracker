@@ -27,9 +27,11 @@ def ask_config(config_file):
             with open(config_file) as json_file:
                 return json.load(json_file)
         except ValueError:
-            raise
+            print('Json file that stores mailer configuration is broken')
+            exit(3)
         except FileNotFoundError:
-            raise
+            print("Config file couldn't be found")
+            exit(3)
 
     try:
         with open(save_path + '/config.json') as json_file:
