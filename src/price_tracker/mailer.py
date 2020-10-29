@@ -22,7 +22,7 @@ class Mailer:
 
     def send_mail(self, url, product_name, price):
         subject = 'Price Fell Down!'
-        tr2_eng = str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCĞIOSU")
+        tr2_eng = str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCGIOSU")
         body = f"{product_name} is cheaper now. Check the link below: \n{url}".translate(tr2_eng)
 
         msg = f"Subject: {subject}\n\n{body}"

@@ -112,3 +112,18 @@ class Scraper:
             self.mailer.send_mail(url, product_name, price)
             return True
         return False
+
+    def check_n11_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers, verify=False)
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find(class_='proName').get_text().strip()
+
+        price = float(
+            re.findall(r'"lowPrice": "(.*)"', soup.prettify())[0]
+        )
+
+        if price < warn_price:
+            self.mailer.send_mail(url, product_name, price)
+            return True
+        return False

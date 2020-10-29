@@ -61,6 +61,15 @@ class TeknosaCommand(ICommand):
         return self.receiver.check_teknosa_product(self.arg['url'], self.arg['warn_price'])
 
 
+class N11Command(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_n11_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []

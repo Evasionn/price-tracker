@@ -1,7 +1,7 @@
 import json
 
 from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, \
-    VatanCommand, TeknosaCommand
+    VatanCommand, TeknosaCommand, N11Command
 from price_tracker.scraper import Scraper
 
 
@@ -39,5 +39,7 @@ def build_command(receiver, item):
         return VatanCommand(receiver, item)
     elif 'teknosa' in item['url']:
         return TeknosaCommand(receiver, item)
+    elif 'n11' in item['url']:
+        return N11Command(receiver, item)
     else:
         print(f'{item["url"]} is a non-supported web site')
