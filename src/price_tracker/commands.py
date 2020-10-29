@@ -52,6 +52,51 @@ class VatanCommand(ICommand):
         return self.receiver.check_vatan_product(self.arg['url'], self.arg['warn_price'])
 
 
+class TeknosaCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_teknosa_product(self.arg['url'], self.arg['warn_price'])
+
+
+class N11Command(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_n11_product(self.arg['url'], self.arg['warn_price'])
+
+
+class CiceksepetiNetCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_ciceksepeti_net_product(self.arg['url'], self.arg['warn_price'])
+
+
+class CiceksepetiComCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_ciceksepeti_com_product(self.arg['url'], self.arg['warn_price'])
+
+
+class MediamarktCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_mediamarkt_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []
@@ -68,7 +113,14 @@ class Invoker:
         return False
 
     def execute(self):
-        self.commands = [
-            command for command in self.commands
-            if not command.execute()
-        ]
+        remaining_list = []
+        for command in self.commands:
+            try:
+                res = command.execute()
+            except AttributeError:
+                print(f"Product not found at url: {command.arg['url']}")
+                res = True
+
+            if not res:
+                remaining_list.append(command)
+        self.commands = remaining_list
