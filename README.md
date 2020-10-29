@@ -5,14 +5,6 @@
 
 It's a simple python3 application that tracks prices and warn the user by email.
 
-## What is New
-### Version 0.4
-- Some bugs are fixed and includes code refactor works
-- More understandable error messages for the user
-- Removing commands that has error
-- teknosa.com, n11.com, ciceksepeti.net, ciceksepeti.com, mediamarkt.com.tr scappers are added
-- code of conduct is published
-
 ## Installation
 ### Requirements
 - python3 or later to run price-tracker
@@ -80,12 +72,19 @@ price_tracker -i products.json -c config.json
 ```bash
 nohup python3 -u -m price_tracker -i products.json -c config.json &
 ```
+## What is New
+### Version 0.4
+- Some bugs are fixed and includes code refactor works
+- More understandable error messages for the user
+- Removing commands that has error
+- teknosa.com, n11.com, ciceksepeti.net, ciceksepeti.com, mediamarkt.com.tr scappers are added
+- code of conduct is published
 
-### Supported Web Sites
+## Supported Web Sites
 - [hepsiburada.com](https://www.hepsiburada.com/)
 - [gittigidiyor.com](https://www.gittigidiyor.com/)
 - [trendyol.com](https://www.trendyol.com/)
-- [amazon.com](https://www.amazon.com/) for each country
+- [amazon.com](https://www.amazon.com/)
 - [vatanbilgisayar.com](https://www.vatanbilgisayar.com/)
 - [teknosa.com](https://www.teknosa.com/)
 - [n11.com](https://urun.n11.com/)
