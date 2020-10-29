@@ -159,3 +159,19 @@ class Scraper:
             self.mailer.send_mail(url, product_name, price)
             return True
         return False
+
+    def check_mediamarkt_product(self, url: str, warn_price: float) -> bool:
+        page = requests.get(url, headers=self.headers)
+
+        soup = BeautifulSoup(page.content, 'html.parser')
+
+        product_name = soup.find('title').get_text().strip()
+
+        price = float(
+            re.sub(r'\D', '', soup.select_one('div.price.big').get_text().strip())
+        )
+
+        if price < warn_price:
+            self.mailer.send_mail(url, product_name, price)
+            return True
+        return False
