@@ -156,6 +156,9 @@ class Invoker:
             except AttributeError:
                 print(f"Product not found at url: {command.arg['url']}")
                 res = True
+            except IndexError:
+                print(f"Unsupported price model at url: {command.arg['url']}")
+                res = True
 
             if not res:
                 remaining_list.append(command)
