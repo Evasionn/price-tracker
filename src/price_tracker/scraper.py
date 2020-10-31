@@ -223,3 +223,12 @@ class Scraper:
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_decathlon_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find(id='productName').get_text()
+
+        price = float(soup.find(id='real_price')['data-price'])
+
+        return self.mail_decider(url, product_name, price, warn_price)

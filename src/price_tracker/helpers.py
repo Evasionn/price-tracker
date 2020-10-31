@@ -65,5 +65,7 @@ def build_command(receiver, item):
         return DandRCommand(receiver, item)
     elif 'toyzzshop' in item['url']:
         return ToyzzshopCommand(receiver, item)
+    elif 'decathlon' in item['url']:
+        return ToyzzshopCommand(receiver, item)
     else:
         print(f'{item["url"]} is a non-supported web site')
