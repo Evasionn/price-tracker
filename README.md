@@ -100,3 +100,4 @@ nohup python3 -u -m price_tracker -i products.json -c config.json &
 - [dr.com.tr](https://www.dr.com.tr/)
 - [toyzzshop.com](https://www.toyzzshop.com/)
 - [decathlon.com.tr](https://www.decathlon.com.tr/)
+- [nike.com](https://www.nike.com/)

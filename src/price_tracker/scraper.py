@@ -232,3 +232,17 @@ class Scraper:
         price = float(soup.find(id='real_price')['data-price'])
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_nike_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find('title').get_text().split('. ')[0]
+
+        price = soup.select_one('div[data-test=product-price-reduced]')
+        if not price:
+            price = soup.select_one('div[data-test=product-price]')
+        price = float(
+            re.findall(r'\d+\.\d+', price.get_text().replace('.', '').replace(',', '.'))[0]
+        )
+
+        return self.mail_decider(url, product_name, price, warn_price)
