@@ -212,3 +212,14 @@ class Scraper:
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_toyzzshop_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find(id='metaTitle').get_text()
+
+        price = float(
+            re.findall(r'\d+\.\d+', soup.find(class_='fs-40').get_text().replace(',', '.'))[0]
+        )
+
+        return self.mail_decider(url, product_name, price, warn_price)
