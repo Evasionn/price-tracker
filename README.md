@@ -73,12 +73,14 @@ price_tracker -i products.json -c config.json
 nohup python3 -u -m price_tracker -i products.json -c config.json &
 ```
 ## What is New
-### Version 0.4
+### Version 0.5
 - Some bugs are fixed and includes code refactor works
-- More understandable error messages for the user
-- Removing commands that has error
-- teknosa.com, n11.com, ciceksepeti.net, ciceksepeti.com, mediamarkt.com.tr scappers are added
-- code of conduct is published
+- Random user agent for get requests
+- ebay.com, morhipo.com, teknostore.com, letgo.com, kitapyurdu.com, tozlu.com, dr.com.tr, toyzzshop.com, 
+decathlon.com.tr, nike.com scrapers are added
+- issue templates are published
+
+Check [change log](https://github.com/Evasionn/price-tracker/blob/master/CHANGE_LOG.md)
 
 ## Supported Web Sites
 [![amazon.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/amazon.png)](https://www.amazon.com/)
