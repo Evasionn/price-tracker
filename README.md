@@ -97,3 +97,4 @@ nohup python3 -u -m price_tracker -i products.json -c config.json &
 - [letgo.com](https://www.letgo.com/)
 - [kitapyurdu.com](https://www.kitapyurdu.com/)
 - [tozlu.com](https://www.tozlu.com/)
+- [dr.com.tr](https://www.dr.com.tr/)

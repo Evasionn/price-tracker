@@ -201,3 +201,14 @@ class Scraper:
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_dandr_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find(class_='product-name').get_text().strip()
+
+        price = float(
+            re.findall(r'\d+,\d+', soup.find(class_='product-price').get_text())[0].replace(',', '.')
+        )
+
+        return self.mail_decider(url, product_name, price, warn_price)

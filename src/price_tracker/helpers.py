@@ -2,7 +2,7 @@ import json
 
 from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, \
     VatanCommand, TeknosaCommand, N11Command, CiceksepetiNetCommand, CiceksepetiComCommand, MediamarktCommand, \
-    EbayCommand, MorhipoCommand, TeknostoreCommand, LetgoCommand, KitapyurduCommand, TozluCommand
+    EbayCommand, MorhipoCommand, TeknostoreCommand, LetgoCommand, KitapyurduCommand, TozluCommand, DandRCommand
 from price_tracker.scraper import Scraper
 
 
@@ -60,5 +60,7 @@ def build_command(receiver, item):
         return KitapyurduCommand(receiver, item)
     elif 'tozlu' in item['url']:
         return TozluCommand(receiver, item)
+    elif 'dr.com' in item['url']:
+        return DandRCommand(receiver, item)
     else:
         print(f'{item["url"]} is a non-supported web site')
