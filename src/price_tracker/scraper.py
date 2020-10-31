@@ -168,3 +168,14 @@ class Scraper:
         price = float(soup.select_one('span[data-price-type=finalPrice]')['data-price-amount'])
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_letgo_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.select_one('div[data-test=name]').get_text()
+
+        price = float(
+            re.findall(r'\d+.\d+', soup.find(class_='price').get_text().replace('.', ''))[0]
+        )
+
+        return self.mail_decider(url, product_name, price, warn_price)

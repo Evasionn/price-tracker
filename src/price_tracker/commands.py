@@ -124,6 +124,15 @@ class TeknostoreCommand(ICommand):
         return self.receiver.check_teknostore_product(self.arg['url'], self.arg['warn_price'])
 
 
+class LetgoCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_letgo_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []

@@ -94,3 +94,4 @@ nohup python3 -u -m price_tracker -i products.json -c config.json &
 - [ebay.com](https://www.ebay.com/)
 - [morhipo.com](https://www.morhipo.com/)
 - [teknostore.com](https://www.teknostore.com/)
+- [letgo.com](https://www.letgo.com/)
