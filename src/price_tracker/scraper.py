@@ -154,3 +154,16 @@ class Scraper:
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_morhipo_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find('title').get_text().strip().split(' | ')[0]
+
+        price = soup.select_one('span.badge-price')
+        if not price:
+            price = float(
+                re.findall(r'\d+\.\d+', soup.select_one('span.final-price').get_text().replace(',', '.'))[0]
+            )
+
+        return self.mail_decider(url, product_name, price, warn_price)

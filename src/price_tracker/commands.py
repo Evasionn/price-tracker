@@ -106,6 +106,15 @@ class EbayCommand(ICommand):
         return self.receiver.check_ebay_product(self.arg['url'], self.arg['warn_price'])
 
 
+class MorhipoCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_morhipo_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []
