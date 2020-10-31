@@ -167,3 +167,12 @@ class Scraper:
             )
 
         return self.mail_decider(url, product_name, price, warn_price)
+
+    def check_teknostore_product(self, url: str, warn_price: float) -> bool:
+        soup = request_sender(url)
+
+        product_name = soup.find(class_='page-title').get_text().strip()
+
+        price = float(soup.select('span[data-price-type=finalPrice]')[0]['data-price-amount'])
+
+        return self.mail_decider(url, product_name, price, warn_price)
