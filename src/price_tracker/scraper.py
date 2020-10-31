@@ -31,9 +31,7 @@ class Scraper:
         soup = request_sender(url)
 
         product_name = soup.find(id='product-name').get_text().strip()
-        price = float(
-            re.sub(r'\D', '', soup.find(id='offering-price').get_text().split(',')[0])
-        )
+        price = float(soup.find(id='offering-price')['content'])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
@@ -42,7 +40,7 @@ class Scraper:
 
         product_name = soup.find(id='sp-title').get_text().strip()
         price = float(
-            re.sub(r'\D', '', soup.find(class_='lastPrice').get_text().replace('\n', '').split(',')[0])
+            re.findall(r'\d+\.\d+', soup.find(class_='lastPrice').get_text().replace('.', '').replace(',', '.'))[0]
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
@@ -50,13 +48,13 @@ class Scraper:
     def check_trendyol_product(self, url: str, warn_price: float) -> bool:
         soup = request_sender(url)
 
-        product_name = soup.find(class_='pr-nm').get_text().strip()
+        product_name = soup.find('title').get_text().split(' | ')[0]
         price = soup.find(class_='prc-dsc')
         if not price:
             price = soup.find(class_='prc-slg')
 
         price = float(
-            re.sub(r'\D', '', price.get_text().split(',')[0])
+            re.findall(r'\d+\.\d+', price.get_text().replace(',', '.'))[0]
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
@@ -71,7 +69,7 @@ class Scraper:
             price = soup.find(id='priceblock_ourprice')
 
         price = float(
-            re.sub(r'\D', '', price.get_text().split(',')[0])
+            re.findall(r'\d+\.\d+', price.get_text().replace('.', '').replace(',', '.'))[0]
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
@@ -81,9 +79,7 @@ class Scraper:
 
         product_name = soup.find(class_='product-list__product-name').get_text().strip()
 
-        price = float(
-            re.sub(r'\D', '', soup.find(class_='product-list__price').get_text().strip())
-        )
+        price = float(soup.find(class_='product-list__price').get_text())
 
         return self.mail_decider(url, product_name, price, warn_price)
 
@@ -92,14 +88,12 @@ class Scraper:
 
         product_name = soup.find(class_='product-title').get_text().strip()
 
-        price = float(
-            re.findall(r"cd_product_price: '(.*)'", soup.prettify())[0]
-        )
+        price = float(soup.find(id='addToCartButton')['data-product-price'])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
     def check_n11_product(self, url: str, warn_price: float) -> bool:
-        soup = request_sender(url, True)
+        soup = request_sender(url)
 
         product_name = soup.find(class_='proName').get_text().strip()
 
@@ -115,7 +109,8 @@ class Scraper:
         product_name = soup.find(class_='o-productDetail__title').get_text().strip()
 
         price = float(
-            re.sub(r'\D', '', soup.find(class_='m-productPrice__value').get_text().strip())
+            re.findall(r'\d+\.\d+',
+                       soup.find(class_='m-productPrice__salePrice').get_text().replace('\n', '').replace(',', '.'))[0]
         )
 
         return self.mail_decider(url, product_name, price, warn_price)
@@ -125,9 +120,9 @@ class Scraper:
 
         product_name = soup.find(class_='product__info__title').get_text().strip()
 
-        price = float(
-            re.sub(r'\D', '', soup.find(class_='product__info__new-price__integer').get_text().strip())
-        )
+        price = soup.find(class_='product__info__new-price__integer').get_text() + soup.find(
+            class_='product__info__new-price__decimal').get_text().replace(',', '.')
+        price = float(re.findall(r'\d+.\d+', price)[0])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
@@ -136,9 +131,7 @@ class Scraper:
 
         product_name = soup.find('title').get_text().strip()
 
-        price = float(
-            re.sub(r'\D', '', soup.select_one('div.price.big').get_text().strip())
-        )
+        price = float(soup.select_one('meta[itemprop=price]')['content'])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
@@ -162,9 +155,8 @@ class Scraper:
 
         price = soup.select_one('span.badge-price')
         if not price:
-            price = float(
-                re.findall(r'\d+\.\d+', soup.select_one('span.final-price').get_text().replace(',', '.'))[0]
-            )
+            price = soup.select_one('span.final-price')
+        price = float(re.findall(r'\d+\.\d+', price.get_text().replace(',', '.'))[0])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
@@ -173,6 +165,6 @@ class Scraper:
 
         product_name = soup.find(class_='page-title').get_text().strip()
 
-        price = float(soup.select('span[data-price-type=finalPrice]')[0]['data-price-amount'])
+        price = float(soup.select_one('span[data-price-type=finalPrice]')['data-price-amount'])
 
         return self.mail_decider(url, product_name, price, warn_price)
