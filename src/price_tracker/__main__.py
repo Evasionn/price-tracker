@@ -7,6 +7,7 @@ def main():
         args = sys.argv[1:]
         main(args)
     except KeyboardInterrupt:
+        print('')
         sys.exit(0)
 
 

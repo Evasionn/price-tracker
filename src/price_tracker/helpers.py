@@ -1,7 +1,9 @@
 import json
 
 from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorCommand, TrendyolCommand, AmazonCommand, \
-    VatanCommand, TeknosaCommand, N11Command, CiceksepetiNetCommand, CiceksepetiComCommand, MediamarktCommand
+    VatanCommand, TeknosaCommand, N11Command, CiceksepetiNetCommand, CiceksepetiComCommand, MediamarktCommand, \
+    EbayCommand, MorhipoCommand, TeknostoreCommand, LetgoCommand, KitapyurduCommand, TozluCommand, DandRCommand, \
+    ToyzzshopCommand, NikeCommand
 from price_tracker.scraper import Scraper
 
 
@@ -47,5 +49,25 @@ def build_command(receiver, item):
         return CiceksepetiComCommand(receiver, item)
     elif 'mediamarkt' in item['url']:
         return MediamarktCommand(receiver, item)
+    elif 'ebay' in item['url']:
+        return EbayCommand(receiver, item)
+    elif 'morhipo' in item['url']:
+        return MorhipoCommand(receiver, item)
+    elif 'teknostore' in item['url']:
+        return TeknostoreCommand(receiver, item)
+    elif 'letgo' in item['url']:
+        return LetgoCommand(receiver, item)
+    elif 'kitapyurdu' in item['url']:
+        return KitapyurduCommand(receiver, item)
+    elif 'tozlu' in item['url']:
+        return TozluCommand(receiver, item)
+    elif 'dr.com' in item['url']:
+        return DandRCommand(receiver, item)
+    elif 'toyzzshop' in item['url']:
+        return ToyzzshopCommand(receiver, item)
+    elif 'decathlon' in item['url']:
+        return ToyzzshopCommand(receiver, item)
+    elif 'nike.com' in item['url']:
+        return NikeCommand(receiver, item)
     else:
         print(f'{item["url"]} is a non-supported web site')

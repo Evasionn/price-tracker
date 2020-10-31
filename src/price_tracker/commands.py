@@ -97,6 +97,96 @@ class MediamarktCommand(ICommand):
         return self.receiver.check_mediamarkt_product(self.arg['url'], self.arg['warn_price'])
 
 
+class EbayCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_ebay_product(self.arg['url'], self.arg['warn_price'])
+
+
+class MorhipoCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_morhipo_product(self.arg['url'], self.arg['warn_price'])
+
+
+class TeknostoreCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_teknostore_product(self.arg['url'], self.arg['warn_price'])
+
+
+class LetgoCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_letgo_product(self.arg['url'], self.arg['warn_price'])
+
+
+class KitapyurduCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_kitapyurdu_product(self.arg['url'], self.arg['warn_price'])
+
+
+class TozluCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_tozlu_product(self.arg['url'], self.arg['warn_price'])
+
+
+class DandRCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_dandr_product(self.arg['url'], self.arg['warn_price'])
+
+
+class ToyzzshopCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_toyzzshop_product(self.arg['url'], self.arg['warn_price'])
+
+
+class DecathlonCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_decathlon_product(self.arg['url'], self.arg['warn_price'])
+
+
+class NikeCommand(ICommand):
+    def __init__(self, receiver, arg):
+        self.receiver = receiver
+        self.arg = arg
+
+    def execute(self):
+        return self.receiver.check_nike_product(self.arg['url'], self.arg['warn_price'])
+
+
 class Invoker:
     def __init__(self):
         self.commands = []
@@ -119,6 +209,9 @@ class Invoker:
                 res = command.execute()
             except AttributeError:
                 print(f"Product not found at url: {command.arg['url']}")
+                res = True
+            except IndexError:
+                print(f"Unsupported price model at url: {command.arg['url']}")
                 res = True
 
             if not res:

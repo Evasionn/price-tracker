@@ -103,6 +103,7 @@ def run(input_file, config):
             time.sleep(60 * 60)
     except KeyboardInterrupt:
         mailer.log_out()
+        print('')
         sys.exit(0)
 
 
@@ -110,4 +111,5 @@ if __name__ == '__main__':
     try:
         main(sys.argv[1:])
     except KeyboardInterrupt:
+        print('')
         sys.exit(0)
