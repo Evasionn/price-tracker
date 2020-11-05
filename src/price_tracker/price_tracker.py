@@ -5,6 +5,7 @@ import sys
 import time
 from getpass import getpass
 
+from price_tracker.constants import SAVE_PATH, CONFIG_PATH
 from price_tracker.helpers import build_invoker
 from price_tracker.mailer import Mailer
 
@@ -17,8 +18,10 @@ Available Arguments
 '''
 
 # create save directory
-save_path = os.path.expanduser("~") + '/price-tracker'
-os.makedirs(save_path, exist_ok=True)
+
+os.makedirs(SAVE_PATH, exist_ok=True)
+
+
 
 
 def ask_config(config_file):
@@ -34,17 +37,17 @@ def ask_config(config_file):
             exit(3)
 
     try:
-        with open(save_path + '/config.json') as json_file:
+        with open(CONFIG_PATH) as json_file:
             config = json.load(json_file)
             answer = input('There is a config file from previous login. Do you want to use it [y|n]: ')
             if answer == 'y':
                 return config
             elif answer == 'n':
-                os.remove(save_path + '/config.json')
+                os.remove(CONFIG_PATH)
     except FileNotFoundError:
         pass
     except ValueError:
-        os.remove(save_path + '/config.json')
+        os.remove(CONFIG_PATH)
 
     sender_gmail = input('Sender Gmail Address: ')
     gmail_password = getpass(prompt='Gmail Password: ')
@@ -53,7 +56,7 @@ def ask_config(config_file):
     answer = input('Do you want to save this configuration for next login [y|n]: ')
     config = {'sender_gmail': sender_gmail, 'gmail_password': gmail_password, 'receiver_email': receiver_email}
     if answer == 'y':
-        with open(save_path + '/config.json', 'w') as config_file:
+        with open(CONFIG_PATH, 'w') as config_file:
             json.dump(config, config_file)
 
     return config

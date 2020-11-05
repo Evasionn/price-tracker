@@ -1,0 +1,118 @@
+<html lang="en">
+  <head>
+    <title>Price Tracker</title>
+  </head>
+  <body>
+    <div>
+      <div id="config-form"></div>
+      <div id="products-form"></div>
+    </div>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script
+      src="https://unpkg.com/react@17/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
+    <script type="text/babel">
+      const { useState } = React;
+      const ConfigForm = () => {
+        return (
+          <React.Fragment>
+            <h2>Config</h2>
+            <form method="post">
+              <div>
+                <label>
+                  Sender gmail:
+                  <input
+                    type="text"
+                    name="sender_gmail"
+                    value="{{config['sender_gmail']}}"
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Gmail password:
+                  <input
+                    type="password"
+                    name="gmail_password"
+                    value="{{config['gmail_password']}}"
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Receiver email:
+                  <input
+                    type="text"
+                    name="receiver_email"
+                    value="{{config['receiver_email']}}"
+                  />
+                </label>
+              </div>
+              <div>
+                <input type="submit" value="Save" />
+                <input type="button" value="Delete" />
+              </div>
+            </form>
+          </React.Fragment>
+        );
+      };
+
+      const ProductsForm = (products) => {
+        const [productList, setProductList] = useState(
+          JSON.parse(products.replaceAll("&#39;", '"'))
+        );
+
+        const handleRemove = (index) => {
+          productList.splice(index, 1);
+          setProductList([...productList]);
+        };
+        return (
+          <React.Fragment>
+            <h2>Products</h2>
+            <form>
+              {productList.map((item, key) => {
+                const { url, warn_price } = item;
+                return (
+                  <div key={key}>
+                    <label>
+                      Url:
+                      <input type="text" name="url" value={url} />
+                    </label>
+                    <label>
+                      Warn Price:
+                      <input type="text" name="value" value={warn_price} />
+                    </label>
+                    <button type="button" onClick={() => handleRemove(key)}>
+                      Remove
+                    </button>
+                  </div>
+                );
+              })}
+
+              <div>
+                <input type="submit" value="Save" />
+                <input type="button" value="Delete Product List" />
+              </div>
+            </form>
+          </React.Fragment>
+        );
+      };
+      ProductsForm.defaultProps = {
+        products: "[]",
+      };
+      ReactDOM.render(
+        React.createElement(ConfigForm),
+        document.querySelector("#config-form")
+      );
+      ReactDOM.render(
+        React.createElement(() => ProductsForm("{{products}}")),
+        document.querySelector("#products-form")
+      );
+    </script>
+  </body>
+</html>
