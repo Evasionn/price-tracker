@@ -1,0 +1,40 @@
+* {
+  font-size: 16px;
+}
+h1 {
+  font-size: 3rem;
+}
+#config-form input[type="text"],
+#config-form input[type="password"] {
+  height: 2rem;
+  width: 40%;
+  display: block;
+}
+#config-form label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#config-form input[type="button"]:nth-child(2) {
+  margin-left: 1rem;
+}
+
+#products-form label {
+  font-weight: 700;
+}
+
+#products-form label:nth-child(2) {
+  margin-left: 1rem;
+}
+
+#products-form input[type="text"] {
+  margin-left: 1rem;
+  height: 2rem;
+  width: 30%;
+  margin-bottom: 1rem;
+}
+
+#products-form .ml {
+  margin-left: 1rem;
+}
