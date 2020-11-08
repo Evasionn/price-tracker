@@ -13,7 +13,7 @@ I suggest you to use two-step verification for the application. For additional i
 
     - [Google Two-Step Verification](https://www.google.com/landing/2step/)
     - [Google App Passwords](https://myaccount.google.com/apppasswords)
-- You can test application with using temp mail as receiver. I use [temp-mail.io](https://temp-mail.io/) while masterment.
+- You can test application with using temp mail as receiver. I use [temp-mail.io](https://temp-mail.io/) while development.
 ### Stable Version
 #### Installing via pip
 recommended way to install is via pip:
