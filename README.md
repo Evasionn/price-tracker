@@ -13,7 +13,7 @@ I suggest you to use two-step verification for the application. For additional i
 
     - [Google Two-Step Verification](https://www.google.com/landing/2step/)
     - [Google App Passwords](https://myaccount.google.com/apppasswords)
-- You can test application with using temp mail as receiver. I use [temp-mail.io](https://temp-mail.io/) while development.
+- You can test application with using temp mail as receiver. I use [temp-mail.io](https://temp-mail.io/) while masterment.
 ### Stable Version
 #### Installing via pip
 recommended way to install is via pip:
@@ -27,50 +27,24 @@ You can install the latest version from Git
 pip3 install git+https://github.com/Evasionn/price-tracker.git
 ```
 ## Usage
-- input and config files must be json. 
-- prepare products.json. Example products.json is must be in format bellow!
 
-```json
-[
-  {
-    "url": "https://www.hepsiburada.com/iphone-se-64-gb-p-HBV00000SXR45",
-    "warn_price": 5000
-  },
-  {
-    "url": "https://www.amazon.com.tr/Philips-Hd7461-20-Kahve-Makinesi/dp/B00R04CAH0/ref=zg_bs_kitchen_home_1?_encoding=UTF8&psc=1&refRID=Q90ZVE1A20WY367CAJPQ",
-    "warn_price": 550
-  },
-  {
-    "url": "https://www.vatanbilgisayar.com/arnica-ih33151-demli-rose-cay-makinesi.html",
-    "warn_price": 340
-  }
-]
-```
-- To run type in terminal
+- Run bellow command to set configurations. It will be automatically opened http://localhost:5051 and after saving 
+config and product list you can click Shutdown Server button or "ctrl + c" in terminal.
+```bash
+price_tracker init
+``` 
+
+![web-server](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/web-server.png)
+
+
+- After setting configuration and product list, it is enough to run bellow command.
 ```bash
 price_tracker
-``` 
-or with defining input file 
-```bash
-price_tracker -i products.json
 ```
 
-- optionally you can define a config.json. It should be in format bellow:
-```json
-{
-    "sender_gmail": "gmail@gmail.com",
-    "gmail_password": "mygmailpassword!",
-    "receiver_mail": "receiver@gmail.com" 
-}
-```
-To run with config file 
+- To run in background
 ```bash
-price_tracker -i products.json -c config.json
-```
-
-- To run in background products and config file must be given as command line argument
-```bash
-nohup python3 -u -m price_tracker -i products.json -c config.json &
+nohup python3 -u -m price_tracker
 ```
 ## What is New
 ### Version 0.5
