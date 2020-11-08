@@ -34,7 +34,7 @@ config and product list you can click Shutdown Server button or "ctrl + c" in te
 price_tracker init
 ``` 
 
-![web-server](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/web-server.png)
+![web-server](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/web-server.png)
 
 
 - After setting configuration and product list, it is enough to run bellow command.
@@ -47,35 +47,32 @@ price_tracker
 nohup python3 -u -m price_tracker
 ```
 ## What is New
-### Version 0.5
-- Some bugs are fixed and includes code refactor works
-- Random user agent for get requests
-- ebay.com, morhipo.com, teknostore.com, letgo.com, kitapyurdu.com, tozlu.com, dr.com.tr, toyzzshop.com, 
-decathlon.com.tr, nike.com scrapers are added
-- issue templates are published
+### Version 0.6
+- Added web server to set configuration and product list easily
+- Hepsiburada scraper updated
 
 Check [change log](https://github.com/Evasionn/price-tracker/blob/master/CHANGE_LOG.md)
 
 ## Supported Web Sites
-[![amazon.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/amazon.png)](https://www.amazon.com/)
-[![ciceksepeti.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/ciceksepeticom.png)](https://www.ciceksepeti.com/)
-[![ciceksepeti.net](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/ciceksepetinet.png)](https://www.ciceksepeti.net/)
-[![decathlon.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/decathlon.png)](https://www.decathlon.com.tr/)
-[![dr.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/dr.png)](https://www.dr.com.tr/)
-[![ebay.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/ebay.png)](https://www.ebay.com/)
-[![gittigidiyor.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/gittigidiyor.png)](https://www.gittigidiyor.com/)
-[![hepsiburada.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/hepsiburada.png)](https://www.hepsiburada.com/)
-[![kitapyurdu.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/kitapyurdu.png)](https://www.kitapyurdu.com/)
-[![letgo.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/letgo.png)](https://www.letgo.com/)
-[![mediamarkt.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/mediamarkt.png)](https://www.mediamarkt.com.tr/)
-[![morhipo.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/morhipo.png)](https://www.morhipo.com/)
-[![n11.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/n11.png)](https://urun.n11.com/)
-[![nike.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/nike.png)](https://www.nike.com/)
-[![teknosa.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/teknosa.png)](https://www.teknosa.com/)
-[![teknostore.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/teknostore.png)](https://www.teknostore.com/)
-[![toyzzshop.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/toyzzshop.png)](https://www.toyzzshop.com/)
-[![tozlu.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/tozlu.png)](https://www.tozlu.com/)
-[![trendyol.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/trendyol.png)](https://www.trendyol.com/)
-[![vatan.com](https://raw.githubusercontent.com/evasionn/price-tracker/develop/docs/vatan.png)](https://www.vatanbilgisayar.com/)
+[![amazon.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/amazon.png)](https://www.amazon.com/)
+[![ciceksepeti.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/ciceksepeticom.png)](https://www.ciceksepeti.com/)
+[![ciceksepeti.net](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/ciceksepetinet.png)](https://www.ciceksepeti.net/)
+[![decathlon.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/decathlon.png)](https://www.decathlon.com.tr/)
+[![dr.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/dr.png)](https://www.dr.com.tr/)
+[![ebay.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/ebay.png)](https://www.ebay.com/)
+[![gittigidiyor.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/gittigidiyor.png)](https://www.gittigidiyor.com/)
+[![hepsiburada.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/hepsiburada.png)](https://www.hepsiburada.com/)
+[![kitapyurdu.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/kitapyurdu.png)](https://www.kitapyurdu.com/)
+[![letgo.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/letgo.png)](https://www.letgo.com/)
+[![mediamarkt.com.tr](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/mediamarkt.png)](https://www.mediamarkt.com.tr/)
+[![morhipo.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/morhipo.png)](https://www.morhipo.com/)
+[![n11.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/n11.png)](https://urun.n11.com/)
+[![nike.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/nike.png)](https://www.nike.com/)
+[![teknosa.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/teknosa.png)](https://www.teknosa.com/)
+[![teknostore.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/teknostore.png)](https://www.teknostore.com/)
+[![toyzzshop.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/toyzzshop.png)](https://www.toyzzshop.com/)
+[![tozlu.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/tozlu.png)](https://www.tozlu.com/)
+[![trendyol.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/trendyol.png)](https://www.trendyol.com/)
+[![vatan.com](https://raw.githubusercontent.com/evasionn/price-tracker/master/docs/vatan.png)](https://www.vatanbilgisayar.com/)
 
 
