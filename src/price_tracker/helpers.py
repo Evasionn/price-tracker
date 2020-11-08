@@ -5,15 +5,19 @@ from price_tracker.commands import Invoker, HepsiburadaCommand, GittigidiyorComm
     EbayCommand, MorhipoCommand, TeknostoreCommand, LetgoCommand, KitapyurduCommand, TozluCommand, DandRCommand, \
     ToyzzshopCommand, NikeCommand
 from price_tracker.scraper import Scraper
+from price_tracker.constants import PRODUCTS_PATH
 
 
-def build_invoker(input_file, mailer):
+def build_invoker(mailer):
     # Reading product list
     try:
-        with open(input_file) as json_file:
+        with open(PRODUCTS_PATH) as json_file:
             products = json.load(json_file)
+    except FileNotFoundError:
+        print("Products file couldn't be found")
+        exit(3)
     except ValueError:
-        print('Json file that stores products is broken')
+        print('Products file is broken')
         exit(3)
 
     # Scraper instance that is receiver of commands

@@ -1,4 +1,7 @@
 ## What is New
+### Version 0.6
+- Added web server to set configuration and product list easily
+- Hepsiburada scraper updated
 ### Version 0.5
 - Some bugs are fixed and includes code refactor works
 - Random user agent for get requests
