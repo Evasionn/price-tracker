@@ -30,8 +30,8 @@ class Scraper:
     def check_hepsiburada_product(self, url: str, warn_price: float) -> bool:
         soup = request_sender(url)
 
-        product_name = soup.find(id='product-name').get_text().strip()
-        price = float(soup.find(id='offering-price')['content'])
+        product_name = soup.find(class_='product-name').get_text()
+        price = float(soup.select_one('span[itemprop=price]')['content'])
 
         return self.mail_decider(url, product_name, price, warn_price)
 
