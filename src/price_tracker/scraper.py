@@ -1,19 +1,18 @@
 import re
 
-import requests
 from bs4 import BeautifulSoup
 import urllib3
 
-from price_tracker.user_agent import get_random_user_agent
+from price_tracker.user_agent import session
 
 urllib3.disable_warnings()
 
 
 def request_sender(url, ssl_verification_bypass=False):
     if ssl_verification_bypass:
-        page = requests.get(url, headers=get_random_user_agent(), verify=False)
+        page = session.get(url, verify=False)
     else:
-        page = requests.get(url, headers=get_random_user_agent())
+        page = session.get(url)
     return BeautifulSoup(page.content, 'html.parser')
 
 
