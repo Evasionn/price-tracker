@@ -32,6 +32,9 @@ class Scraper:
         product_name = soup.find(class_='product-name').get_text()
         price = float(soup.select_one('span[itemprop=price]')['content'])
 
+        in_stock = re.findall(r'"stockInformation":{"isInStock":(true|false),', soup.prettify())[0] == 'true'
+        if not in_stock:
+            raise ValueError
         return self.mail_decider(url, product_name, price, warn_price)
 
     def check_gittigidiyor_product(self, url: str, warn_price: float) -> bool:

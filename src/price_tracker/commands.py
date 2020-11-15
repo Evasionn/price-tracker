@@ -213,6 +213,9 @@ class Invoker:
             except IndexError:
                 print(f"Unsupported price model at url: {command.arg['url']}")
                 res = True
+            except ValueError:
+                print(f"The product out of stock at url: {command.arg['url']}")
+                res = True
 
             if not res:
                 remaining_list.append(command)
