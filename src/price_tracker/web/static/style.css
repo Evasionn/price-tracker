@@ -16,7 +16,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-#config-form input[type="button"]:nth-child(2) {
+#config-form input[type="button"]:nth-child(n+1) {
   margin-left: 1rem;
 }
 
