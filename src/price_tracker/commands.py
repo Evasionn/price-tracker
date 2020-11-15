@@ -1,5 +1,7 @@
 import abc
 
+from price_tracker.exceptions import OutOfStock
+
 
 class ICommand(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -212,6 +214,9 @@ class Invoker:
                 res = True
             except IndexError:
                 print(f"Unsupported price model at url: {command.arg['url']}")
+                res = True
+            except OutOfStock:
+                print(f"The product out of stock at url: {command.arg['url']}")
                 res = True
 
             if not res:
