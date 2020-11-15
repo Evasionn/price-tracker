@@ -1,8 +1,9 @@
 import re
 
-from bs4 import BeautifulSoup
 import urllib3
+from bs4 import BeautifulSoup
 
+from price_tracker.exceptions import OutOfStock
 from price_tracker.user_agent import session
 
 urllib3.disable_warnings()
@@ -34,7 +35,7 @@ class Scraper:
 
         in_stock = re.findall(r'"stockInformation":{"isInStock":(true|false),', soup.prettify())[0] == 'true'
         if not in_stock:
-            raise ValueError
+            raise OutOfStock
         return self.mail_decider(url, product_name, price, warn_price)
 
     def check_gittigidiyor_product(self, url: str, warn_price: float) -> bool:
