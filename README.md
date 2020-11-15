@@ -44,7 +44,7 @@ price_tracker
 
 - To run in background
 ```bash
-nohup python3 -u -m price_tracker
+nohup python3 -u -m price_tracker &
 ```
 ## What is New
 ### Version 0.6
