@@ -22,7 +22,8 @@ const ProductsForm = (products) => {
   const handleSave = () => {
     let isValid = true;
     productList.forEach((item) => {
-      if (item.url === "" || item.warn_price === "") isValid = false;
+      if (item.url === "" && item.warn_price !== "") isValid = false;
+      else if (item.url !== "" && item.warn_price === "") isValid = false;
     });
 
     if (!isValid) {
@@ -30,7 +31,11 @@ const ProductsForm = (products) => {
       return;
     }
 
-    request("/products", productList, "PUT")
+    request(
+      "/products",
+      productList.filter(({ url }) => url !== ""),
+      "PUT"
+    )
       .then((r) => {
         if (r.status === 200) alert(SUCCESS_MESSAGE);
         else alert(FAIL_MESSAGE);
